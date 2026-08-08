@@ -1,9 +1,12 @@
-"""CRUD helpers."""
+import uuid
 
-from __future__ import annotations
+def create_lead(
+        customer_name: str,
+        email: str,
+        product: str,
+        company: str
 
-from .models import ChatRecord
+):
 
-
-def create_chat_record(record_id: int, message: str) -> ChatRecord:
-    return ChatRecord(id=record_id, message=message)
+    lead_id=f"LEAD-{uuid.uuid4().hex[:8].upper()}"
+    

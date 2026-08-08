@@ -1,15 +1,29 @@
-"""Shared graph state for the multi-agent backend."""
-
 from __future__ import annotations
+from langchain_core.messages import AnyMessage
 
-from dataclasses import dataclass, field
-from typing import Any
+import os
+from typing import TypedDict , Annotated,Any
+import operator
 
 
-@dataclass
-class GraphState:
-    """Minimal state container passed between graph nodes."""
 
-    messages: list[str] = field(default_factory=list)
-    current_agent: str = "planner"
-    context: dict[str, Any] = field(default_factory=dict)
+class CRMState(TypedDict):
+    messages: Annotated[list[AnyMessage], operator.add]
+    #user
+    user_query:str
+
+    #customer
+    customer_name:str | None
+    email: str| None
+    product: str | None
+    company: str | None
+
+    intent: str | None
+    plan: list[str]
+    current_agent: str | None
+
+    lead_created: bool
+    lead_id: str | None
+    email_sent: bool
+
+    response: str
